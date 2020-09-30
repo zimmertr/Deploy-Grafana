@@ -1,0 +1,65 @@
+version: '3.1'
+
+services:
+  postgres:
+    restart: on-failure
+    image: postgres:${POSTGRES_VERSION}
+    container_name: postgres
+    user: "1000"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports:
+      - 5432:5432
+    volumes:
+      - /opt/tks/postgres:/var/lib/postgresql/data
+
+  influxdb:
+    restart: on-failure
+    image: influxdb:${INFLUXDB_VERSION}
+    container_name: influxdb
+    user: "1000"
+    environment:
+      INFLUXDB_DB: ${INFLUXDB_DATABASE}
+      INFLUXDB_ADMIN_USER: ${INFLUXDB_USERNAME}
+      INFLUXDB_ADMIN_PASSWORD: ${INFLUXDB_PASSWORD}
+    ports:
+      - 8086:8086/tcp
+      - 8089:8089/udp
+    volumes:
+      - /opt/tks/influxdb/:/var/lib/influxdb
+      - /etc/tks/influxdb.conf:/etc/influxdb/influxdb.conf
+      - /etc/tks/bootstrap_influxdb.sh:/docker-entrypoint-initdb.d/zbootstrap.sh
+
+  postgres_wait:
+    restart: on-failure
+    depends_on:
+      - postgres
+    image: postgres:${POSTGRES_VERSION}
+    container_name: postgres-wait
+    command: pg_isready -h postgres -p 5432 -U tks
+    links:
+      - postgres
+
+  grafana:
+    restart: on-failure
+    depends_on:
+      - postgres_wait
+      - influxdb
+    image: grafana/grafana:${GRAFANA_VERSION}
+    container_name: grafana
+    # user: $${UID} # should probably control this instead of hard coding 1000
+    user: "1000"
+    ports:
+      - 3000:3000
+    links:
+      - postgres
+      - influxdb
+    volumes:
+      - /etc/tks/grafana.ini:/etc/grafana/grafana.ini
+      - /etc/tks/grafana_datasources.yml:/etc/grafana/provisioning/datasources/grafana_datasources.yml
+      - /etc/tks/grafana_dashboards.yml:/etc/grafana/provisioning/dashboards/grafana_dasboards.yml
+      - /etc/tks/grafana_dashboard_test.json:/etc/grafana/provisioning/dashboards/Miscellaneous/grafana_dashboard_test.json
+      - /opt/tks/grafana/data:/var/lib/grafana
+      - /opt/tks/grafana/logs:/var/log/grafana

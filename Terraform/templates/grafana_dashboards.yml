@@ -1,0 +1,9 @@
+apiVersion: 1
+providers:
+- name: 'Miscellaneous'
+  org_id: 1
+  folder: 'Miscellaneous'
+  type: 'file'
+  editable: true
+  options:
+    folder: '/etc/grafana/provisioning/dashboards/Miscellaneous'
