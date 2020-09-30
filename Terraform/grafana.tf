@@ -129,7 +129,7 @@ resource "proxmox_vm_qemu" "grafana" {
 
   provisioner "file" {
     source      = "${path.root}/dashboards"
-    destination = "/etc/tks"
+    destination = "/etc/tks/grafana/"
   }
   # provisioner "file" {
   #   destination = "/etc/tks/grafana_dashboards.yml"
