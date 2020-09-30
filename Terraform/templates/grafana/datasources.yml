@@ -7,13 +7,16 @@ deleteDatasources:
   - name: InfluxDB-${INFLUXDB_DATABASE}
     orgId: 1
 
+  - name: InfluxDB-Telegraf
+    orgId: 1
+
+  - name: InfluxDB-Proxmox
+    orgId: 1
+
   # - name: InfluxDB-Unifi
   #   orgId: 1
 
   # - name: InfluxDB-UPS
-
-  # - name: InfluxDB-Proxmox
-  #   orgId: 1
 
   # - name: InfluxDB-Odroid
   #   orgId: 1
@@ -74,15 +77,6 @@ datasources:
   #   type: influxdb
   #   access: proxy
   #   database: ups
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
-
-  # - name: InfluxDB-Proxmox
-  #   type: influxdb
-  #   access: proxy
-  #   database: proxmox
   #   user: {{ influxdb_user }}
   #   url: http://{{ influxdb_hostname }}:8086
   #   secureJsonData:
