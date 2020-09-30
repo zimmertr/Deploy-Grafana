@@ -1,3 +1,5 @@
 *.terraform*
 *.tfstate*
 test.sh
+Terraform/dashboards/Hardware/*
+Terraform/dashboards/Miscellaneous/*
