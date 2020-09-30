@@ -51,6 +51,7 @@ resource "proxmox_vm_qemu" "grafana" {
       "mkdir /etc/tks/grafana",
       "mkdir /etc/tks/influxdb",
       "mkdir /etc/tks/telegraf",
+      "mkdir /etc/tks/prometheus",
       "mkdir /etc/tks/docker",
     ]
   }
@@ -111,19 +112,27 @@ resource "proxmox_vm_qemu" "grafana" {
     })
   }
 
+  # Prometheus Configuration
+  provisioner "file" {
+    destination = "/etc/tks/prometheus/prometheus.yml"
+    content = templatefile("${path.root}/templates/prometheus/prometheus.yml", {
+    })
+  }
+
   # Docker Compose Configuration
   provisioner "file" {
     destination = "/etc/tks/docker/docker-compose.yml"
     content = templatefile("${path.root}/templates/docker/docker-compose.yml", {
-      GRAFANA_VERSION   = var.GRAFANA_VERSION
-      POSTGRES_VERSION  = var.POSTGRES_VERSION
-      POSTGRES_USERNAME = var.POSTGRES_USERNAME
-      POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
-      POSTGRES_DATABASE = var.POSTGRES_DATABASE
-      INFLUXDB_VERSION  = var.INFLUXDB_VERSION
-      INFLUXDB_DATABASE = var.INFLUXDB_DATABASE
-      INFLUXDB_USERNAME = var.INFLUXDB_USERNAME
-      INFLUXDB_PASSWORD = var.INFLUXDB_PASSWORD
+      GRAFANA_VERSION    = var.GRAFANA_VERSION
+      POSTGRES_VERSION   = var.POSTGRES_VERSION
+      POSTGRES_USERNAME  = var.POSTGRES_USERNAME
+      POSTGRES_PASSWORD  = var.POSTGRES_PASSWORD
+      POSTGRES_DATABASE  = var.POSTGRES_DATABASE
+      INFLUXDB_VERSION   = var.INFLUXDB_VERSION
+      INFLUXDB_DATABASE  = var.INFLUXDB_DATABASE
+      INFLUXDB_USERNAME  = var.INFLUXDB_USERNAME
+      INFLUXDB_PASSWORD  = var.INFLUXDB_PASSWORD
+      PROMETHEUS_VERSION = var.PROMETHEUS_VERSION
     })
   }
 
