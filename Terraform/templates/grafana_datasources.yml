@@ -43,6 +43,24 @@ datasources:
     secureJsonData:
       password: ${INFLUXDB_PASSWORD}
 
+  - name: InfluxDB-Telegraf
+    type: influxdb
+    access: proxy
+    database: telegraf
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
+
+  - name: InfluxDB-Proxmox
+    type: influxdb
+    access: proxy
+    database: proxmox
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
+
   # - name: InfluxDB-Unifi
   #   type: influxdb
   #   access: proxy
