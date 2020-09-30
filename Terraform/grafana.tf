@@ -44,6 +44,9 @@ resource "proxmox_vm_qemu" "grafana" {
     private_key = file(var.GRAFANA_SSH_PRIVATE_KEY_PATH)
   }
 
+  provisioner "remote-exec" {
+    inline = ["mkdir -p /etc/tks/{grafana,influxdb,telegraf,docker}"]
+  }
   provisioner "file" {
     destination = "/etc/tks/grafana/grafana.ini"
     content = templatefile("${path.root}/templates/grafana/grafana.ini", {
