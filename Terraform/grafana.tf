@@ -45,7 +45,13 @@ resource "proxmox_vm_qemu" "grafana" {
   }
 
   provisioner "remote-exec" {
-    inline = ["mkdir -p /etc/tks/{grafana,influxdb,telegraf,docker}"]
+    inline = [
+      "mkdir /etc/tks",
+      "mkdir /etc/tks/grafana",
+      "mkdir /etc/tks/influxdb",
+      "mkdir /etc/tks/telegraf",
+      "mkdir /etc/tks/docker",
+    ]
   }
   provisioner "file" {
     destination = "/etc/tks/grafana/grafana.ini"

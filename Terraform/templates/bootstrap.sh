@@ -36,7 +36,7 @@ install_compose(){
 }
 
 deploy_grafana(){
-  sudo mkdir /opt/tks/{grafana,postgres,influxdb}
+  sudo mkdir -p /opt/tks/{grafana,postgres,influxdb}
   sudo chown -R tks:tks /opt/tks
 
   cd /etc/tks/docker
