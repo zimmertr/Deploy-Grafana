@@ -264,3 +264,13 @@ variable "INFLUXDB_COMMANDS" {
   default     = ""
   description = "The list of commands to run on InfluxDB after starting it."
 }
+
+
+##################################################
+# Prometheus Configuration                       #
+##################################################
+variable "PROMETHEUS_VERSION" {
+  type        = string
+  default     = "latest"
+  description = "The Prometheus Docker container tag to use."
+}

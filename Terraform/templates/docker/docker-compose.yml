@@ -34,6 +34,18 @@ services:
       - /etc/tks/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
       - /etc/tks/influxdb/bootstrap.sh:/docker-entrypoint-initdb.d/zbootstrap.sh
 
+  # Metrics backend
+  prometheus:
+    restart: always
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    container_name: prometheus
+    user: "1000"
+    ports:
+      - 9090:9090
+    volumes:
+      - /etc/tks/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /opt/tks/prometheus/:/prometheus/
+
   # Make sure Postgres is up before Grafana attempts to startup, or it will
   postgres_wait:
     restart: on-failure

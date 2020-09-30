@@ -11,7 +11,7 @@ main(){
   echo "TKS - $(date) - Installing Docker Compose."
   install_compose > /var/log/tks/install_compose.log 2>&1
 
-  echo "TKS - $(date) - Deploying Grafana."
+  echo "TKS - $(date) - Deploying Grafana stack."
   deploy_grafana > /var/log/tks/deploy_grafana.log 2>&1
 
   echo "TKS - $(date) - Waiting for Apt."
@@ -36,7 +36,7 @@ install_compose(){
 }
 
 deploy_grafana(){
-  sudo mkdir -p /opt/tks/{grafana,postgres,influxdb}
+  sudo mkdir -p /opt/tks/{grafana,postgres,influxdb,prometheus}
   sudo chown -R tks:tks /opt/tks
 
   cd /etc/tks/docker
