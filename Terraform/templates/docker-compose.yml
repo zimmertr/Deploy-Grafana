@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   postgres:
-    restart: on-failure
+    restart: always
     image: postgres:${POSTGRES_VERSION}
     container_name: postgres
     user: "1000"
@@ -16,7 +16,7 @@ services:
       - /opt/tks/postgres:/var/lib/postgresql/data
 
   influxdb:
-    restart: on-failure
+    restart: always
     image: influxdb:${INFLUXDB_VERSION}
     container_name: influxdb
     user: "1000"
@@ -43,7 +43,7 @@ services:
       - postgres
 
   grafana:
-    restart: on-failure
+    restart: always
     depends_on:
       - postgres_wait
       - influxdb
