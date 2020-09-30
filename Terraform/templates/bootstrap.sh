@@ -36,11 +36,10 @@ install_compose(){
 }
 
 deploy_grafana(){
-  sudo mkdir -p /opt/tks/grafana/{data,logs}
-  sudo mkdir /opt/tks/{postgres,influxdb}
+  sudo mkdir -p /opt/tks/{grafana,postgres,influxdb}
   sudo chown -R tks:tks /opt/tks
 
-  cd /etc/tks/
+  cd /etc/tks/docker
   sudo docker-compose up -d
 }
 
@@ -75,7 +74,7 @@ deploy_telegraf(){
   sudo apt-get update
   sudo apt-get install -y telegraf
 
-  sudo mv /etc/tks/telegraf.conf /etc/telegraf/telegraf.conf
+  sudo ln -fs /etc/tks/telegraf/telgraf.conf /etc/telegraf/telegraf.conf
   sudo chown -R telegraf:telegraf /etc/telegraf/
   sudo usermod -aG docker telegraf
 

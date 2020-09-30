@@ -1,0 +1,9 @@
+apiVersion: 1
+providers:
+- name: 'Hardware'
+  org_id: 1
+  folder: 'Hardware'
+  type: 'file'
+  editable: true
+  options:
+    folder: '/etc/grafana/provisioning/dashboards/Hardware'

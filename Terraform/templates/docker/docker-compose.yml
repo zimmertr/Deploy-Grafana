@@ -1,6 +1,7 @@
 version: '3.1'
 
 services:
+  # Grafana backend
   postgres:
     restart: always
     image: postgres:${POSTGRES_VERSION}
@@ -15,6 +16,7 @@ services:
     volumes:
       - /opt/tks/postgres:/var/lib/postgresql/data
 
+  # Metrics backend
   influxdb:
     restart: always
     image: influxdb:${INFLUXDB_VERSION}
@@ -29,9 +31,10 @@ services:
       - 8089:8089/udp
     volumes:
       - /opt/tks/influxdb/:/var/lib/influxdb
-      - /etc/tks/influxdb.conf:/etc/influxdb/influxdb.conf
-      - /etc/tks/bootstrap_influxdb.sh:/docker-entrypoint-initdb.d/zbootstrap.sh
+      - /etc/tks/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+      - /etc/tks/influxdb/bootstrap.sh:/docker-entrypoint-initdb.d/zbootstrap.sh
 
+  # Make sure Postgres is up before Grafana attempts to startup, or it will
   postgres_wait:
     restart: on-failure
     depends_on:
@@ -42,6 +45,7 @@ services:
     links:
       - postgres
 
+  # Grafana frontend
   grafana:
     restart: always
     depends_on:
@@ -49,17 +53,14 @@ services:
       - influxdb
     image: grafana/grafana:${GRAFANA_VERSION}
     container_name: grafana
-    # user: $${UID} # should probably control this instead of hard coding 1000
-    user: "1000"
+    user: "1000" # Should probably variablize this UID.
     ports:
       - 3000:3000
     links:
       - postgres
       - influxdb
     volumes:
-      - /etc/tks/grafana.ini:/etc/grafana/grafana.ini
-      - /etc/tks/grafana_datasources.yml:/etc/grafana/provisioning/datasources/grafana_datasources.yml
-      - /etc/tks/grafana_dashboards.yml:/etc/grafana/provisioning/dashboards/grafana_dasboards.yml
-      - /etc/tks/grafana_dashboard_test.json:/etc/grafana/provisioning/dashboards/Miscellaneous/grafana_dashboard_test.json
-      - /opt/tks/grafana/data:/var/lib/grafana
-      - /opt/tks/grafana/logs:/var/log/grafana
+      - /etc/tks/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /etc/tks/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - /etc/tks/grafana/dashboards/:/etc/grafana/provisioning/dashboards/
+      - /opt/tks/grafana/:/var/lib/grafana

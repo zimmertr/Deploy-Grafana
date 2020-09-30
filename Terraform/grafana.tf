@@ -44,9 +44,21 @@ resource "proxmox_vm_qemu" "grafana" {
     private_key = file(var.GRAFANA_SSH_PRIVATE_KEY_PATH)
   }
 
+  # Generate a file hierarchy for configuration templates
+  provisioner "remote-exec" {
+    inline = [
+      "mkdir /etc/tks",
+      "mkdir /etc/tks/grafana",
+      "mkdir /etc/tks/influxdb",
+      "mkdir /etc/tks/telegraf",
+      "mkdir /etc/tks/docker",
+    ]
+  }
+
+  # Grafana Configuration
   provisioner "file" {
-    destination = "/etc/tks/grafana.ini"
-    content = templatefile("${path.root}/templates/grafana.ini", {
+    destination = "/etc/tks/grafana/grafana.ini"
+    content = templatefile("${path.root}/templates/grafana/grafana.ini", {
       GRAFANA_USERNAME      = var.GRAFANA_USERNAME
       GRAFANA_PASSWORD      = var.GRAFANA_PASSWORD
       GRAFANA_SMTP_SERVER   = var.GRAFANA_SMTP_SERVER
@@ -60,41 +72,49 @@ resource "proxmox_vm_qemu" "grafana" {
       POSTGRES_DATABASE     = var.POSTGRES_DATABASE
     })
   }
+
+  # Grafana Datasources
   provisioner "file" {
-    destination = "/etc/tks/grafana_datasources.yml"
-    content = templatefile("${path.root}/templates/grafana_datasources.yml", {
+    destination = "/etc/tks/grafana/datasources.yml"
+    content = templatefile("${path.root}/templates/grafana/datasources.yml", {
       INFLUXDB_DATABASE = var.INFLUXDB_DATABASE
       INFLUXDB_USERNAME = var.INFLUXDB_USERNAME
       INFLUXDB_PASSWORD = var.INFLUXDB_PASSWORD
     })
   }
+
+  # InfluxDB Configuration
   provisioner "file" {
-    destination = "/etc/tks/grafana_dashboards.yml"
-    content = templatefile("${path.root}/templates/grafana_dashboards.yml", {
-    })
-  }
-  provisioner "file" {
-    destination = "/etc/tks/grafana_dashboard_test.json"
-    content = templatefile("${path.root}/templates/grafana_dashboard_test.json", {
-    })
-  }
-  provisioner "file" {
-    destination = "/etc/tks/influxdb.conf"
-    content = templatefile("${path.root}/templates/influxdb.conf", {
+    destination = "/etc/tks/influxdb/influxdb.conf"
+    content = templatefile("${path.root}/templates/influxdb/influxdb.conf", {
       INFLUXDB_UDP_DATABASE = var.INFLUXDB_UDP_DATABASE
     })
   }
+
+  # InfluxDB Extra Commands
   provisioner "file" {
-    destination = "/etc/tks/telegraf.conf"
-    content = templatefile("${path.root}/templates/telegraf.conf", {
+    destination = "/etc/tks/influxdb/bootstrap.sh"
+    content = templatefile("${path.root}/templates/influxdb/bootstrap.sh", {
+      INFLUXDB_USERNAME = var.INFLUXDB_USERNAME
+      INFLUXDB_PASSWORD = var.INFLUXDB_PASSWORD
+      INFLUXDB_COMMANDS = var.INFLUXDB_COMMANDS
+    })
+  }
+
+  # Telegraf Configuration
+  provisioner "file" {
+    destination = "/etc/tks/telegraf/telegraf.conf"
+    content = templatefile("${path.root}/templates/telegraf/telegraf.conf", {
       GRAFANA_HOSTNAME  = var.GRAFANA_HOSTNAME
       INFLUXDB_USERNAME = var.INFLUXDB_USERNAME
       INFLUXDB_PASSWORD = var.INFLUXDB_PASSWORD
     })
   }
+
+  # Docker Compose Configuration
   provisioner "file" {
-    destination = "/etc/tks/docker-compose.yml"
-    content = templatefile("${path.root}/templates/docker-compose.yml", {
+    destination = "/etc/tks/docker/docker-compose.yml"
+    content = templatefile("${path.root}/templates/docker/docker-compose.yml", {
       GRAFANA_VERSION   = var.GRAFANA_VERSION
       POSTGRES_VERSION  = var.POSTGRES_VERSION
       POSTGRES_USERNAME = var.POSTGRES_USERNAME
@@ -106,9 +126,17 @@ resource "proxmox_vm_qemu" "grafana" {
       INFLUXDB_PASSWORD = var.INFLUXDB_PASSWORD
     })
   }
+
+  # Grafana Dashboards
   provisioner "file" {
-    destination = "/etc/tks/bootstrap_grafana.sh"
-    content = templatefile("${path.root}/templates/bootstrap_grafana.sh", {
+    source      = "${path.root}/dashboards"
+    destination = "/etc/tks/grafana/"
+  }
+
+  # Bootstrapping script
+  provisioner "file" {
+    destination = "/etc/tks/bootstrap.sh"
+    content = templatefile("${path.root}/templates/bootstrap.sh", {
       GRAFANA_HOSTNAME      = var.GRAFANA_HOSTNAME
       GRAFANA_SEARCH_DOMAIN = var.GRAFANA_SEARCH_DOMAIN
       GRAFANA_VERSION       = var.GRAFANA_VERSION
@@ -119,7 +147,5 @@ resource "proxmox_vm_qemu" "grafana" {
       POSTGRES_DATABASE     = var.POSTGRES_DATABASE
     })
   }
-  provisioner "remote-exec" {
-    inline = ["bash /etc/tks/bootstrap_grafana.sh"]
-  }
+  provisioner "remote-exec" { inline = ["bash /etc/tks/bootstrap.sh"] }
 }
