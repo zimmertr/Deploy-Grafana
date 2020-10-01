@@ -26,7 +26,7 @@ This is a work of progress using the TKS template with the SSH hot swapped out d
   # Compute
   export TF_VAR_GRAFANA_SOCKETS=1
   export TF_VAR_GRAFANA_CORES=2
-  export TF_VAR_GRAFANA_MEMORY=409809
+  export TF_VAR_GRAFANA_MEMORY=4098
 
   # Storage
   export TF_VAR_GRAFANA_STORAGE="FlashPool"
