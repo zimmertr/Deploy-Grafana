@@ -2,6 +2,7 @@
 *.tfstate*
 test.sh
 Terraform/dashboards/Hardware/*
-Terraform/dashboards/Miscellaneous/*
+Terraform/dashboards/General/*
 !Terraform/dashboards/Hardware/proxmox.json
-!Terraform/dashboards/Miscellaneous/self.json
+!Terraform/dashboards/General/docker.json
+!Terraform/dashboards/General/system.json
