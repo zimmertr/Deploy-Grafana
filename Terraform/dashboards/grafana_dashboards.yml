@@ -7,10 +7,10 @@ providers:
   editable: true
   options:
     folder: '/etc/grafana/provisioning/dashboards/Hardware'
-- name: 'Miscellaneous'
+- name: 'General'
   org_id: 1
-  folder: 'Miscellaneous'
+  folder: 'General'
   type: 'file'
   editable: true
   options:
-    folder: '/etc/grafana/provisioning/dashboards/Miscellaneous'
+    folder: '/etc/grafana/provisioning/dashboards/General'
