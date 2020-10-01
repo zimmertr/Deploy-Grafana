@@ -8,8 +8,7 @@ Deploy a monitoring stack to Proxmox in a single virtual machine. Including:
   * InfluxDB for storing metrics
   * Prometheus for stroing metrics
   * Telegraf for sending metrics from the monitoring server
-  * Dashboard for monitoring the server
-  * Dashboard for monitoring Proxmox
+  * Example dashboards to get started monitoring Proxmox and the stack itself.
 
 ## Warning
 
@@ -66,13 +65,14 @@ This is a work of progress using the TKS template with the SSH hot swapped out d
 ```
 
 
-2) Drop your Dashboard `json` files into `./Terraform/dashboards/DIRECTORY/` and configure `./Terraform/dashboards/grafana_dashboards.yml` accordingly. These dashboards will automatically be imported on first startup. Two dashboards are included by default for monitoring the monitoring server itself as well as your Proxmox hosts.
+2) Drop your Dashboard `json` files into `./Terraform/dashboards/DIRECTORY/` and configure `./Terraform/dashboards/grafana_dashboards.yml` accordingly. These dashboards will automatically be imported on first startup. Some dashboards are included by default for monitoring the monitoring server itself as well as your Proxmox hosts.
 
 3) Configure `./Terraform/templates/grafana/datasources.yml` according to the data sources you have in your environment. By default, this stack will include the following:
 
 * Influxdb-${INFLUXDB_DATABASE}: Created for you from a passed in variable.
 * Influxdb-telegraf: Created automatically for storing the local agent's metrics
 * Influxdb-proxmox: Created automatically for storing Proxmox metrics.
+* Prometheus: Created automatically for stroing metrics.
 
 3) **OPTIONAL STEP** Configure Proxmox to send metrics to your InfluxDB Database by following the instructions [here](https://pve.proxmox.com/wiki/External_Metric_Server). It is unclear if Proxmox requires a reboot after modifying this file, but it is likely that some services must be restarted.
 
@@ -83,7 +83,6 @@ influxdb: Mimas
   server mimas.sol.milkyway
   port 8089
 ```
-
 
 4) Deploy the VM.
 
