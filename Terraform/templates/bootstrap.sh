@@ -74,7 +74,7 @@ deploy_telegraf(){
   sudo apt-get update
   sudo apt-get install -y telegraf
 
-  sudo ln -fs /etc/tks/telegraf/telgraf.conf /etc/telegraf/telegraf.conf
+  sudo ln -fs /etc/tks/telegraf/telegraf.conf /etc/telegraf/telegraf.conf
   sudo chown -R telegraf:telegraf /etc/telegraf/
   sudo usermod -aG docker telegraf
 
