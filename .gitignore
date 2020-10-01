@@ -3,3 +3,5 @@
 test.sh
 Terraform/dashboards/Hardware/*
 Terraform/dashboards/Miscellaneous/*
+!Terraform/dashboards/Hardware/proxmox.json
+!Terraform/dashboards/Miscellaneous/self.json
