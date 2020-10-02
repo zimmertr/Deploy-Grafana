@@ -18,8 +18,8 @@ deleteDatasources:
 
   # - name: InfluxDB-UPS
 
-  # - name: InfluxDB-Odroid
-  #   orgId: 1
+  - name: InfluxDB-Odroid
+    orgId: 1
 
   # - name: InfluxDB-Saturn
   #   orgId: 1
@@ -59,6 +59,15 @@ datasources:
     type: influxdb
     access: proxy
     database: proxmox
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
+
+  - name: InfluxDB-Odroid
+    type: influxdb
+    access: proxy
+    database: odroid
     user: ${INFLUXDB_USERNAME}
     url: http://influxdb:8086
     secureJsonData:
