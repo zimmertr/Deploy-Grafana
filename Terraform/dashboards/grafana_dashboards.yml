@@ -9,7 +9,7 @@ providers:
     folder: '/etc/grafana/provisioning/dashboards/Hardware'
 - name: 'General'
   org_id: 1
-  folder: 'General'
+  # folder: 'General' # General folder exists by default, providing `folder` directive breaks Grafana.
   type: 'file'
   editable: true
   options:
