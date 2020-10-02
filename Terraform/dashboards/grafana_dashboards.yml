@@ -4,13 +4,13 @@ providers:
   org_id: 1
   folder: 'Hardware'
   type: 'file'
-  editable: true
+  allowUiUpdates: true
   options:
-    folder: '/etc/grafana/provisioning/dashboards/Hardware'
+    path: '/etc/grafana/provisioning/dashboards/Hardware'
 - name: 'General'
   org_id: 1
   # folder: 'General' # General folder exists by default, providing `folder` directive breaks Grafana.
   type: 'file'
-  editable: true
+  allowUiUpdates: true
   options:
-    folder: '/etc/grafana/provisioning/dashboards/General'
+    path: '/etc/grafana/provisioning/dashboards/General'
