@@ -3,6 +3,7 @@
 test.sh
 Terraform/dashboards/Hardware/*
 Terraform/dashboards/General/*
+TODO.md
 !Terraform/dashboards/Hardware/proxmox.json
 !Terraform/dashboards/General/docker.json
 !Terraform/dashboards/General/system.json
