@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 928,
   "graphTooltip": 1,
-  "id": 17,
-  "iteration": 1601595630076,
+  "id": 14,
+  "iteration": 1601598709610,
   "links": [],
   "panels": [
     {
@@ -1416,8 +1416,9 @@
           ],
           "hide": false,
           "measurement": "cpu_percentageBusy",
+          "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(usage_user) as \"user\", mean(usage_system) as \"system\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$server$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
+          "query": "SELECT mean(usage_user) as \"user\", mean(usage_system) as \"system\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$server$/ AND $timeFilter GROUP BY time($interval), *",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -8777,7 +8778,7 @@
       }
     }
   ],
-  "refresh": "1m",
+  "refresh": "5m",
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
@@ -9037,5 +9038,5 @@
   "timezone": "browser",
   "title": "System",
   "uid": "000000127",
-  "version": 4
+  "version": 2
 }
