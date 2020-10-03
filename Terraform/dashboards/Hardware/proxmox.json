@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 10048,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1601487913701,
+  "id": 2,
+  "iteration": 1601608928159,
   "links": [],
   "panels": [
     {
@@ -1562,7 +1562,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
+        "w": 3,
         "x": 0,
         "y": 16
       },
@@ -1618,9 +1618,10 @@
               "type": "fill"
             }
           ],
+          "measurement": "system",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"used\") / last(\"total\") FROM \"system\" WHERE (\"host\" = 'local' AND \"nodename\" =~ /^$server$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT last(\"used\") /\"total\" FROM \"system\" WHERE (\"nodename\" =~ /^$server$/ AND \"host\" = 'local') AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1628,17 +1629,29 @@
             [
               {
                 "params": [
-                  "value"
+                  "used"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "last"
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "nodename",
+              "operator": "=~",
+              "value": "/^$server$/"
+            },
+            {
+              "condition": "AND",
+              "key": "host",
+              "operator": "=",
+              "value": "local"
+            }
+          ]
         }
       ],
       "thresholds": "0.75,0.875",
@@ -1683,8 +1696,142 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 4,
+        "w": 3,
+        "x": 3,
+        "y": 16
+      },
+      "id": 68,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.1.3",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"used\") /\"total\" FROM \"system\" WHERE (\"nodename\" =~ /^$server$/ AND \"host\" = 'local-lvm') AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "used"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "nodename",
+              "operator": "=~",
+              "value": "/^$server$/"
+            },
+            {
+              "condition": "AND",
+              "key": "host",
+              "operator": "=",
+              "value": "local-lvm"
+            }
+          ]
+        }
+      ],
+      "thresholds": "0.75,0.875",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "local-lvm",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB-Proxmox",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "format": "percentunit",
+      "gauge": {
+        "maxValue": 1,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 8,
         "y": 16
       },
       "id": 56,
@@ -1742,7 +1889,7 @@
           "measurement": "system",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"used\") / last(\"total\") FROM \"system\" WHERE (\"host\" = 'local' AND \"nodename\" =~ /^earth$/) AND time >= now() - 3h GROUP BY time(2m) fill(null)",
+          "query": "SELECT last(\"used\") /\"total\" FROM \"system\" WHERE (\"nodename\" =~ /^$server$/ AND \"host\" = 'DataPool') AND $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1823,8 +1970,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 8,
+        "w": 3,
+        "x": 11,
         "y": 16
       },
       "id": 54,
@@ -1963,8 +2110,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 12,
+        "w": 3,
+        "x": 15,
         "y": 16
       },
       "id": 66,
@@ -2087,6 +2234,7 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB-Proxmox",
+      "decimals": 2,
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -2103,8 +2251,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 16,
+        "w": 3,
+        "x": 18,
         "y": 16
       },
       "id": 65,
@@ -2243,8 +2391,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 20,
+        "w": 3,
+        "x": 21,
         "y": 16
       },
       "id": 67,
@@ -5527,5 +5675,5 @@
   "timezone": "",
   "title": "Proxmox",
   "uid": "kxQQuHRZk",
-  "version": 7
+  "version": 1
 }
