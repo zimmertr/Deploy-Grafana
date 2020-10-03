@@ -74,7 +74,7 @@ This is a work of progress using the TKS template with the SSH hot swapped out d
 * Influxdb-proxmox: Created automatically for storing Proxmox metrics.
 * Prometheus: Created automatically for stroing metrics.
 
-3) **OPTIONAL STEP** Configure Proxmox to send metrics to your InfluxDB Database by following the instructions [here](https://pve.proxmox.com/wiki/External_Metric_Server). It is unclear if Proxmox requires a reboot after modifying this file, but it is likely that some services must be restarted.
+4) **OPTIONAL STEP:** Configure Proxmox to send metrics to your InfluxDB Database by following the instructions [here](https://pve.proxmox.com/wiki/External_Metric_Server). It is unclear if Proxmox requires a reboot after modifying this file, but it is likely that some services must be restarted.
 
 My configurion looks like:
 
@@ -84,7 +84,11 @@ influxdb: Mimas
   port 8089
 ```
 
-4) Deploy the VM.
+5) **OPTIONAL STEP:** Deploy a [Federated Prometheu](https://github.com/zimmertr/TKS-Deploy_Kubernetes_Apps/tree/master/Federated_Monitoring)s monitoring stack to your Kubernetes cluster to obtain cluster metrics. Then update the `federate` job in `Terraform/templates/prometheus/prometheus.yml` to reflect your hostname. Be sure to also adjust the Kustomize overlays for the federation deployment according to your worker node hostnames & TLS configuration.
+
+
+
+6) Deploy the VM.
 
 ```bash
 terraform init
