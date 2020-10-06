@@ -7,6 +7,13 @@ providers:
   allowUiUpdates: true
   options:
     path: '/etc/grafana/provisioning/dashboards/Hardware'
+- name: 'Kubernetes'
+  org_id: 1
+  folder: 'Kubernetes'
+  type: 'file'
+  allowUiUpdates: true
+  options:
+    path: '/etc/grafana/provisioning/dashboards/Kubernetes'
 - name: 'General'
   org_id: 1
   # folder: 'General' # General folder exists by default, providing `folder` directive breaks Grafana.
