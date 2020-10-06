@@ -206,6 +206,11 @@ variable "GRAFANA_SMTP_PASSWORD" {
   type        = string
   description = "The SMTP password for Grafana to use."
 }
+variable "GRAFANA_PLUGINS" {
+  type        = string
+  description = "A comma separated list of Grafana plugins to install."
+  default     = "grafana-clock-panel,grafana-piechart-panel"
+}
 
 
 ##################################################
