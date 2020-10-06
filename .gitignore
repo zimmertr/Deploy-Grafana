@@ -7,3 +7,4 @@ TODO.md
 !Terraform/dashboards/Hardware/proxmox.json
 !Terraform/dashboards/General/docker.json
 !Terraform/dashboards/General/system.json
+!Terraform/dashboards/General/haproxy.json
