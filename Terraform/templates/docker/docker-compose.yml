@@ -14,7 +14,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /opt/tks/postgres:/var/lib/postgresql/data
+      - /mnt/tks/postgres:/var/lib/postgresql/data
 
   # Metrics backend
   influxdb:
@@ -30,7 +30,7 @@ services:
       - 8086:8086/tcp
       - 8089:8089/udp
     volumes:
-      - /opt/tks/influxdb/:/var/lib/influxdb
+      - /mnt/tks/influxdb/:/var/lib/influxdb
       - /etc/tks/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
       - /etc/tks/influxdb/bootstrap.sh:/docker-entrypoint-initdb.d/zbootstrap.sh
 
@@ -44,7 +44,7 @@ services:
       - 9090:9090
     volumes:
       - /etc/tks/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /opt/tks/prometheus/:/prometheus/
+      - /mnt/tks/prometheus/:/prometheus/
 
   # Make sure Postgres is up before Grafana attempts to startup, or it will
   postgres_wait:
@@ -77,4 +77,4 @@ services:
       - /etc/tks/grafana/grafana.ini:/etc/grafana/grafana.ini
       - /etc/tks/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
       - /etc/tks/grafana/dashboards/:/etc/grafana/provisioning/dashboards/
-      - /opt/tks/grafana/:/var/lib/grafana
+      - /mnt/tks/grafana/:/var/lib/grafana

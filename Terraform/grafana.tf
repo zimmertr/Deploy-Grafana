@@ -155,6 +155,9 @@ resource "proxmox_vm_qemu" "grafana" {
       POSTGRES_USERNAME     = var.POSTGRES_USERNAME
       POSTGRES_PASSWORD     = var.POSTGRES_PASSWORD
       POSTGRES_DATABASE     = var.POSTGRES_DATABASE
+      NFS_HOSTNAME          = var.NFS_HOSTNAME
+      NFS_MOUNTPOINT        = var.NFS_MOUNTPOINT
+      NFS_ARGUMENTS         = var.NFS_ARGUMENTS
     })
   }
   provisioner "remote-exec" { inline = ["bash /etc/tks/bootstrap.sh"] }

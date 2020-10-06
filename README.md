@@ -68,7 +68,7 @@ This monitoring stack is pre-configured to listen for metrics from both Proxmox 
 
    # General
    export TF_VAR_GRAFANA_VMID=4020
-   export TF_VAR_GRAFANA_HOSTNAME="Mimas"
+   export TF_VAR_GRAFANA_HOSTNAME="tks-mon"
    export TF_VAR_GRAFANA_FULL_CLONE=true
    export TF_VAR_GRAFANA_ENABLE_BACKUPS=true
    export TF_VAR_GRAFANA_ENABLE_ONBOOT=true
@@ -80,7 +80,7 @@ This monitoring stack is pre-configured to listen for metrics from both Proxmox 
    export TF_VAR_GRAFANA_GATEWAY="192.168.40.1"
    export TF_VAR_GRAFANA_NAMESERVER="192.168.1.100"
    export TF_VAR_GRAFANA_SEARCH_DOMAIN="sol.milkyway"
-   export TF_VAR_GRAFANA_SSH_PRIVATE_KEY_PATH="/Users/tj/.ssh/Sol.Milkyway/mimas.sol.milkyway"
+   export TF_VAR_GRAFANA_SSH_PRIVATE_KEY_PATH="/Users/tj/.ssh/Sol.Milkyway/tks-mon.sol.milkyway"
 
    # Grafana
    export TF_VAR_GRAFANA_VERSION="7.2.0"
@@ -95,6 +95,10 @@ This monitoring stack is pre-configured to listen for metrics from both Proxmox 
    export TF_VAR_INFLUXDB_PASSWORD="P@ssw0rd1\!" # Be sure to escape special characters
    export TF_VAR_INFLUXDB_UDP_DATABASE="proxmox"
    export TF_VAR_INFLUXDB_COMMANDS="CREATE DATABASE unifi; CREATE DATABASE ups"
+
+  # NFS Client
+  export TF_VAR_NFS_HOSTNAME="earth.sol.milkyway"
+  export TF_VAR_NFS_MOUNTPOINT="/mnt/DataPool/Monitoring"
    ```
 
 3. Drop your Dashboard `json` files into `./Terraform/dashboards/DIRECTORY/` and configure `./Terraform/dashboards/grafana_dashboards.yml` accordingly. These dashboards will automatically be imported on first startup. Some dashboards are included by default for monitoring the monitoring server itself as well as your Proxmox hosts.
@@ -111,8 +115,8 @@ This monitoring stack is pre-configured to listen for metrics from both Proxmox 
    My configurion looks like:
 
    ```bash
-   influxdb: Mimas
-   server mimas.sol.milkyway
+   influxdb: tks-mon
+   server tks-mon.sol.milkyway
    port 8089
    ```
 

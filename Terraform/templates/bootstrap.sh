@@ -8,6 +8,12 @@ main(){
   echo "TKS - $(date) - Setting the hostname."
   configure_hostname
 
+  echo "TKS - $(date) - Waiting for Apt."
+  wait_for_apt > /var/log/tks/wait_for_apt.log 2>&1
+
+  echo "TKS - $(date) - Installing NFS Client"
+  install_nfs_client > /var/log/tks/install_nfs_client.log 2>&1
+
   echo "TKS - $(date) - Installing Docker Compose."
   install_compose > /var/log/tks/install_compose.log 2>&1
 
@@ -27,6 +33,13 @@ configure_hostname(){
   sudo hostnamectl set-hostname ${GRAFANA_HOSTNAME}.${GRAFANA_SEARCH_DOMAIN}
 }
 
+install_nfs_client(){
+  sudo apt-get install -y nfs-common
+  echo "${NFS_HOSTNAME}:${NFS_MOUNTPOINT} /mnt/tks nfs ${NFS_ARGUMENTS} 0 0" | sudo tee -a /etc/fstab
+  sudo mkdir /mnt/tks
+  sudo mount -a
+}
+
 install_compose(){
   sudo curl -L \
     "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" \
@@ -36,8 +49,8 @@ install_compose(){
 }
 
 deploy_grafana(){
-  sudo mkdir -p /opt/tks/{grafana,postgres,influxdb,prometheus}
-  sudo chown -R tks:tks /opt/tks
+  sudo mkdir -p /mnt/tks/{grafana,postgres,influxdb,prometheus}
+  sudo chown -R tks:tks /mnt/tks
 
   cd /etc/tks/docker
   sudo docker-compose up -d

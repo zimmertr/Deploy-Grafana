@@ -279,3 +279,21 @@ variable "PROMETHEUS_VERSION" {
   default     = "latest"
   description = "The Prometheus Docker container tag to use."
 }
+
+
+##################################################
+# NFS Client Configuration                       #
+##################################################
+variable "NFS_HOSTNAME" {
+  type        = string
+  description = "The hostname or IP Address of your NFS server."
+}
+variable "NFS_MOUNTPOINT" {
+  type        = string
+  description = "The mountpoint for your NFS Server."
+}
+variable "NFS_ARGUMENTS" {
+  type        = string
+  default     = "rw,async,hard,intr,noexec"
+  description = "A comma separated list of arguments to pass for the NFS Mountpoint."
+}
