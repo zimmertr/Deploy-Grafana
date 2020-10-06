@@ -124,6 +124,7 @@ resource "proxmox_vm_qemu" "grafana" {
     destination = "/etc/tks/docker/docker-compose.yml"
     content = templatefile("${path.root}/templates/docker/docker-compose.yml", {
       GRAFANA_VERSION    = var.GRAFANA_VERSION
+      GRAFANA_PLUGINS    = var.GRAFANA_PLUGINS
       POSTGRES_VERSION   = var.POSTGRES_VERSION
       POSTGRES_USERNAME  = var.POSTGRES_USERNAME
       POSTGRES_PASSWORD  = var.POSTGRES_PASSWORD

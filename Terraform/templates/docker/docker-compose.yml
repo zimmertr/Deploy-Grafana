@@ -66,6 +66,8 @@ services:
     image: grafana/grafana:${GRAFANA_VERSION}
     container_name: grafana
     user: "1000" # Should probably variablize this UID.
+    environment:
+      GF_INSTALL_PLUGINS: ${GRAFANA_PLUGINS}
     ports:
       - 3000:3000
     links:
