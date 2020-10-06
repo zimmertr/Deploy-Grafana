@@ -13,19 +13,17 @@ deleteDatasources:
   - name: InfluxDB-Proxmox
     orgId: 1
 
-  # - name: InfluxDB-Unifi
-  #   orgId: 1
+  - name: InfluxDB-Unifi
+    orgId: 1
 
-  # - name: InfluxDB-UPS
+  - name: InfluxDB-UPS
+    orgId: 1
 
   - name: InfluxDB-Odroid
     orgId: 1
 
-  # - name: InfluxDB-Saturn
-  #   orgId: 1
-
-  # - name: InfluxDB-Jupiter
-  #   orgId: 1
+  - name: InfluxDB-Varken
+    orgId: 1
 
 datasources:
   - name: Prometheus
@@ -73,56 +71,29 @@ datasources:
     secureJsonData:
       password: ${INFLUXDB_PASSWORD}
 
-  # - name: InfluxDB-Unifi
-  #   type: influxdb
-  #   access: proxy
-  #   database: unifi
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
+  - name: InfluxDB-Varken
+    type: influxdb
+    access: proxy
+    database: varken
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
 
-  # - name: InfluxDB-UPS
-  #   type: influxdb
-  #   access: proxy
-  #   database: ups
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
+  - name: InfluxDB-Unifi
+    type: influxdb
+    access: proxy
+    database: unifi
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
 
-  # - name: InfluxDB-Odroid
-  #   type: influxdb
-  #   access: proxy
-  #   database: odroid
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
-
-  # - name: InfluxDB-Saturn
-  #   type: influxdb
-  #   access: proxy
-  #   database: saturn
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
-
-  # - name: InfluxDB-Jupiter
-  #   type: influxdb
-  #   access: proxy
-  #   database: jupiter
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
-
-  # - name: InfluxDB-Varken
-  #   type: influxdb
-  #   access: proxy
-  #   database: varken
-  #   user: {{ influxdb_user }}
-  #   url: http://{{ influxdb_hostname }}:8086
-  #   secureJsonData:
-  #     password: {{ influxdb_password }}
+  - name: InfluxDB-UPS
+    type: influxdb
+    access: proxy
+    database: ups
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
