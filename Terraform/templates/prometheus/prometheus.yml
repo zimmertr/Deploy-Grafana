@@ -18,3 +18,20 @@ scrape_configs:
     static_configs:
       - targets:
         - 'callisto.sol.milkyway:9090'
+
+  - job_name: 'pihole'
+    static_configs:
+      - targets:
+        - 'ganymede.sol.milkyway:9617'
+
+  - job_name: 'jira'
+    metrics_path: '/plugins/servlet/prometheus/metrics'
+    static_configs:
+      - targets:
+        - 'ariel.sol.milkyway:8080'
+
+  - job_name: 'confluence'
+    metrics_path: '/plugins/servlet/prometheus/metrics'
+    static_configs:
+      - targets:
+        - 'europa.sol.milkyway:8090'
