@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 367,
   "graphTooltip": 1,
-  "id": 32,
-  "iteration": 1602018783402,
+  "id": 17,
+  "iteration": 1602441587768,
   "links": [],
   "panels": [
     {
@@ -2167,21 +2167,21 @@
           "value": ""
         },
         "datasource": "Prometheus",
-        "definition": "",
+        "definition": "label_values(haproxy_up,alias)",
         "hide": 0,
         "includeAll": false,
         "label": "Load Balancer",
         "multi": false,
         "name": "alias",
         "options": [],
-        "query": "label_values(haproxy_up, alias)",
+        "query": "label_values(haproxy_up,alias)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": null,
+        "tagValuesQuery": "",
         "tags": [],
-        "tagsQuery": null,
+        "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
@@ -2241,7 +2241,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -2300,7 +2299,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "HAproxy Load Balancer",
+  "title": "HAProxy Summary",
   "uid": "Plfpfm5Gz",
-  "version": 1
+  "version": 2
 }

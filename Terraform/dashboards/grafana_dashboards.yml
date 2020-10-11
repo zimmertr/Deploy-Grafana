@@ -14,6 +14,13 @@ providers:
   allowUiUpdates: true
   options:
     path: '/etc/grafana/provisioning/dashboards/Kubernetes'
+- name: 'TKS'
+  org_id: 1
+  folder: 'TKS'
+  type: 'file'
+  allowUiUpdates: true
+  options:
+    path: '/etc/grafana/provisioning/dashboards/TKS'
 - name: 'General'
   org_id: 1
   # folder: 'General' # General folder exists by default, providing `folder` directive breaks Grafana.

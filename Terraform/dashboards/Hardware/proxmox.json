@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 10048,
   "graphTooltip": 0,
-  "id": 6,
-  "iteration": 1602439936664,
+  "id": 7,
+  "iteration": 1602441038989,
   "links": [],
   "panels": [
     {
@@ -5336,8 +5336,8 @@
     ]
   },
   "time": {
-    "from": "now-4d",
-    "to": "now"
+    "from": "2020-10-11T17:22:05.025Z",
+    "to": "2020-10-11T17:28:57.622Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -5365,7 +5365,7 @@
     ]
   },
   "timezone": "",
-  "title": "Proxmox",
-  "uid": "kxQQuHRZk",
-  "version": 4
+  "title": "Proxmox Summary",
+  "uid": "kxQQuHRZka",
+  "version": 2
 }
