@@ -12,12 +12,12 @@
       }
     ]
   },
-  "description": "Docker Metrics with InfluxDB and Telegraf",
+  "description": "",
   "editable": true,
   "gnetId": 10585,
   "graphTooltip": 0,
-  "id": 16,
-  "iteration": 1601595325673,
+  "id": 22,
+  "iteration": 1602441053950,
   "links": [],
   "panels": [
     {
@@ -1425,7 +1425,6 @@
         "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -1544,7 +1543,7 @@
     ]
   },
   "timezone": "",
-  "title": "Docker",
+  "title": "Docker Summary",
   "uid": "iMowdtHZz",
-  "version": 5
+  "version": 3
 }
