@@ -25,6 +25,9 @@ deleteDatasources:
   - name: InfluxDB-Varken
     orgId: 1
 
+  - name: InfluxDB-iDRAC
+    orgId: 1
+
 datasources:
   - name: Prometheus
     type: prometheus
@@ -93,6 +96,15 @@ datasources:
     type: influxdb
     access: proxy
     database: ups
+    user: ${INFLUXDB_USERNAME}
+    url: http://influxdb:8086
+    secureJsonData:
+      password: ${INFLUXDB_PASSWORD}
+
+  - name: InfluxDB-iDRAC
+    type: influxdb
+    access: proxy
+    database: idrac
     user: ${INFLUXDB_USERNAME}
     url: http://influxdb:8086
     secureJsonData:

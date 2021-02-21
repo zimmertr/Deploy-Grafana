@@ -209,7 +209,7 @@ variable "GRAFANA_SMTP_PASSWORD" {
 variable "GRAFANA_PLUGINS" {
   type        = string
   description = "A comma separated list of Grafana plugins to install."
-  default     = "grafana-clock-panel,grafana-piechart-panel"
+  default     = "grafana-clock-panel,grafana-piechart-panel,flant-statusmap-panel"
 }
 
 
