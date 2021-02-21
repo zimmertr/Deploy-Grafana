@@ -95,11 +95,13 @@ This monitoring stack is pre-configured to listen for metrics from both Proxmox 
    export TF_VAR_INFLUXDB_PASSWORD="P@ssw0rd1\!" # Be sure to escape special characters
    export TF_VAR_INFLUXDB_UDP_DATABASE="proxmox"
    export TF_VAR_INFLUXDB_COMMANDS="CREATE DATABASE unifi; CREATE DATABASE ups"
-
-  # NFS Client
-  export TF_VAR_NFS_HOSTNAME="earth.sol.milkyway"
-  export TF_VAR_NFS_MOUNTPOINT="/mnt/DataPool/Monitoring"
+   
+   # NFS Client
+   
+   export TF_VAR_NFS_HOSTNAME="earth.sol.milkyway"
+   export TF_VAR_NFS_MOUNTPOINT="/mnt/DataPool/Monitoring"
    ```
+
 
 3. Drop your Dashboard `json` files into `./Terraform/dashboards/DIRECTORY/` and configure `./Terraform/dashboards/grafana_dashboards.yml` accordingly. These dashboards will automatically be imported on first startup. Some dashboards are included by default for monitoring the monitoring server itself as well as your Proxmox hosts.
 
